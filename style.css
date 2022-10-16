@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+
+.grid-container {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-block {
+    width: 6vw;
+    height: 6vh;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    border-style: solid;
+}
