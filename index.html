@@ -10,10 +10,16 @@
     </head>
 </head>
 <body>
-<div class="grid-container">
-
-
+<div class="buttons-container">
+    <div class="range-container">
+        <input type="range" min="1" max="64" value="20" class="slider" id="grid-slider">
+        <div>
+            <span id="range-value"></span>
+        </div>
+        <button class="grid-button">Clear Board</button>
+    </div>
 </div>
+<div class="grid-container"></div>
 
 <script src="script.js"></script>
 </body>
