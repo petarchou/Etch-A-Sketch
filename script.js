@@ -48,7 +48,8 @@ slider.oninput = function () {
 }
 //Change grid when slider is released
 slider.onmouseup = function () {
-    createGrid(slider.value);
+    size = slider.value;
+    createGrid(size);
 }
 
 
