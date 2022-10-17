@@ -2,8 +2,11 @@ const grid = document.querySelector('.grid-container');
 
 const gridBlock = document.createElement('div');
 gridBlock.classList.add('grid-block');
+const DEFAULT_SIZE = 20;
+const DEFAULT_COLOR = '#000';
+const DEFAULT_MODE = 'color';
 
-let size = 20;
+let size = DEFAULT_SIZE;
 gridBlock.style.width = (100/size) + '%';
 gridBlock.style.height = (100/size) + '%';
 
@@ -14,20 +17,48 @@ for (let i = 0; i < size; i++) {
     }
 }
 
+//Buttons
+const colorModeBtn = document.querySelector('#color-mode');
+const rainbowModeBtn = document.querySelector('#rainbow-mode');
+const eraserModeBtn = document.querySelector('#eraser-mode');
+const clearGridBtn = document.querySelector('#clear');
+
+colorModeBtn.onclick = (e) => {
+    changeBG = colorMode;
+    activateButton(e);
+};
+rainbowModeBtn.onclick = (e) => {
+    changeBG = rainbowMode;
+    activateButton(e);
+};
+eraserModeBtn.onclick = (e) => {
+    changeBG = eraserMode;
+    activateButton(e);
+};
+clearGridBtn.onclick = () => createGrid(size);
+
+
+//Active Button
+let current_mode = DEFAULT_MODE;
+const buttons = document.querySelectorAll('.toggler');
+function activateButton(event) {
+    buttons.forEach(button => button.classList.remove('active'));
+    event.target.classList.add('active');
+}
+
+
 //this glitches if mouse is released outside the browser window. But is my current best solution.
 let mouseDown = [0,0];
 document.body.onmousedown = function (event) {
     ++mouseDown[event.button];
-    console.log(mouseDown[0]);
 }
 document.body.onmouseup = function (event) {
     --mouseDown[event.button];
-    console.log(mouseDown[0]);
 }
 
 
 const gridElements = document.querySelectorAll('.grid-block');
-const changeBG = event => event.target.style.backgroundColor = 'rgba('+Math.random()*256+","+Math.random()*256+","+Math.random()*256+")";
+let changeBG = colorMode;
 
 function addListeners(element) {
     element.addEventListener('mouseover',
@@ -54,8 +85,7 @@ slider.onmouseup = function () {
 
 
 //Clear Board Button
-const button = document.querySelector('.grid-button');
-button.onclick = () => createGrid(size);
+
 //Clear Board func
 function createGrid(newSize) {
     const gridElements = document.querySelectorAll('.grid-block');
@@ -71,4 +101,38 @@ function createGrid(newSize) {
     }
     const newElements = document.querySelectorAll('.grid-block');
     newElements.forEach(addListeners);
+}
+
+
+let current_color = DEFAULT_COLOR;
+
+//Color mode
+const colorWheel = document.querySelector('#wheel');
+colorWheel.oninput = e => {
+    current_color = e.target.value;
+}
+function colorMode(event) {
+    event.target.style.backgroundColor = current_color;
+}
+//Rainbow mode
+function rainbowMode(event) {
+    event.target.style.backgroundColor = 'rgba('+Math.random()*256+","+Math.random()*256+","+Math.random()*256+")";
+}
+
+//Eraser mode
+function eraserMode(event) {
+    event.target.style.backgroundColor = 'transparent';
+}
+
+
+//Shading mode - unsuccessful
+// const SHADING_STARTER = 'rgba(0,0,0,0.1)';
+// function shadingMode(event) {
+//
+//     }
+
+
+if(getComputedStyle(document.body).width<=550) {
+    const btns = document.querySelector('.grid-container');
+    document.body.appendChild(btns);
 }
