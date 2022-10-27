@@ -19,6 +19,7 @@ for (let i = 0; i < size; i++) {
 
 //Buttons
 const colorModeBtn = document.querySelector('#color-mode');
+colorModeBtn.classList.add("active");
 const rainbowModeBtn = document.querySelector('#rainbow-mode');
 const eraserModeBtn = document.querySelector('#eraser-mode');
 const clearGridBtn = document.querySelector('#clear');
